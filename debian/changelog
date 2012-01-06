@@ -1,0 +1,38 @@
+libgpg-error (1.7-6) unstable; urgency=low
+
+  * 11/12/21
+  *  - remove unnecessary file - debian/copyright
+  * Git: unmodified/libgpg-error
+  * Tag: libgpg-error_1.7-6
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 21 Dec 2011 11:51:56 +0900
+
+libgpg-error (1.7-5) unstable; urgency=low
+
+  * Re-enable running dh_makeshlibs
+
+ -- Rafal Krypa  <r.krypa@samsung.com>  Thu, 09 Sep 2010 14:22:56 +0900
+
+libgpg-error (1.7-4) unstable; urgency=low
+
+  * change install file
+
+ -- Youngjae Shin <yj99.shin@samsung.com>  Fri, 20 Nov 2009 16:55:07 +0900
+
+libgpg-error (1.7-3) unstable; urgency=low
+
+  * remove .git
+
+ -- Youngjae Shin <yj99.shin@samsung.com>  Fri, 20 Nov 2009 14:15:57 +0900
+
+libgpg-error (1.7-2) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Youngjae Shin <yj99.shin@samsung.com>  Thu, 12 Nov 2009 20:42:25 +0900
+
+libgpg-error (1.7-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Youngjae Shin <yj99.shin@samsung.com>  Thu, 12 Nov 2009 20:42:25 +0900
