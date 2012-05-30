@@ -4,6 +4,7 @@ Version: 1.7
 Release: 1
 URL: ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 Source0: ftp://ftp.gnupg.org/gcrypt/libgpg-error/%{name}-%{version}.tar.bz2
+Source1001: packaging/libgpg-error.manifest 
 Group: System/Libraries
 License: LGPLv2+
 BuildRequires: gawk, gettext-tools
@@ -33,6 +34,7 @@ contains files necessary to develop applications using libgpg-error.
 sed -i -e 's|^libdir=@libdir@$|libdir=@exec_prefix@/lib|g' src/gpg-error-config.in
 
 %build
+cp %{SOURCE1001} .
 %configure --disable-static --enable-malloc0returnsnull
 make
 
@@ -81,11 +83,13 @@ rm -fr $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
+%manifest libgpg-error.manifest
 %defattr(-,root,root)
 %{_bindir}/gpg-error
 /%{_lib}/libgpg-error.so.*
 
 %files devel
+%manifest libgpg-error.manifest
 %defattr(-,root,root)
 %{_bindir}/gpg-error-config
 %{_libdir}/libgpg-error.so
