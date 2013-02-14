@@ -1,0 +1,5 @@
+@PREFIX@/include/*
+@PREFIX@/lib/*.la
+@PREFIX@/lib/*.so
+@PREFIX@/lib/lib*.a
+@PREFIX@/bin/*
