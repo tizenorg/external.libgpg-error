@@ -1,0 +1,8 @@
+libgpg-error (1.7-6) unstable; urgency=low
+
+  * 11/12/21
+  *  - remove unnecessary file - debian/copyright
+  * Git: external/libgpg-error
+  * Tag: libgpg-error_1.7-6
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 21 Dec 2011 11:43:39 +0900
