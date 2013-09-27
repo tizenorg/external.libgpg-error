@@ -36,8 +36,12 @@ sed -i -e 's|^libdir=@libdir@$|libdir=@exec_prefix@/lib|g' src/gpg-error-config.
 %configure --disable-static --enable-malloc0returnsnull
 make
 
+
 %install
 rm -fr $RPM_BUILD_ROOT
+mkdir -p %{buildroot}/usr/share/license
+cp COPYING %{buildroot}/usr/share/license/%{name}
+
 %make_install
 rm -rf $RPM_BUILD_ROOT/%{_datadir}/common-lisp
 
@@ -84,6 +88,7 @@ rm -fr $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/gpg-error
 /%{_lib}/libgpg-error.so.*
+/usr/share/license/%{name}
 
 %files devel
 %defattr(-,root,root)
