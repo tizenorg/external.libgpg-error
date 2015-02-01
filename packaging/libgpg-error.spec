@@ -4,8 +4,9 @@ Version: 1.7
 Release: 1
 URL: ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 Source0: ftp://ftp.gnupg.org/gcrypt/libgpg-error/%{name}-%{version}.tar.bz2
+Source1001: %{name}.manifest
 Group: System/Libraries
-License: LGPLv2+
+License: LGPLv2+ or GPLv2+
 BuildRequires: gawk, gettext-tools
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -31,6 +32,7 @@ contains files necessary to develop applications using libgpg-error.
 # The config script already suppresses the -L if it's /usr/lib, so cheat and
 # set it to a value which we know will be suppressed.
 sed -i -e 's|^libdir=@libdir@$|libdir=@exec_prefix@/lib|g' src/gpg-error-config.in
+cp %{SOURCE1001} .
 
 %build
 %configure --disable-static --enable-malloc0returnsnull
@@ -38,10 +40,12 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
+mkdir -p %{buildroot}/usr/share/license
+cp %{_builddir}/%{name}-%{version}/COPYING %{buildroot}/usr/share/license/%{name}
+cat %{_builddir}/%{name}-%{version}/COPYING.LIB >> %{buildroot}/usr/share/license/%{name}
+
 %make_install
 rm -rf $RPM_BUILD_ROOT/%{_datadir}/common-lisp
-mkdir -p %{buildroot}/usr/share/license
-cp COPYING %{buildroot}/usr/share/license/%{name}
 
 %find_lang %{name}
 
@@ -83,10 +87,11 @@ rm -fr $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
+%manifest %{name}.manifest
+/usr/share/license/%{name}
 %defattr(-,root,root)
 %{_bindir}/gpg-error
 /%{_lib}/libgpg-error.so.*
-%{_datadir}/license/%{name}
 
 %files devel
 %defattr(-,root,root)
@@ -94,3 +99,4 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libgpg-error.so
 %{_includedir}/gpg-error.h
 %{_datadir}/aclocal/gpg-error.m4
+
