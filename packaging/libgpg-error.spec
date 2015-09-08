@@ -1,11 +1,12 @@
-Summary: Library for error values used by GnuPG components
+Summary: Library for error values used by GnuPG components 
 Name: libgpg-error
 Version: 1.7
 Release: 1
 URL: ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 Source0: ftp://ftp.gnupg.org/gcrypt/libgpg-error/%{name}-%{version}.tar.bz2
+Source1001: %{name}.manifest
 Group: System/Libraries
-License: LGPLv2+
+License: LGPL-2.1+ and GPL-2.0+
 BuildRequires: gawk, gettext-tools
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -31,6 +32,7 @@ contains files necessary to develop applications using libgpg-error.
 # The config script already suppresses the -L if it's /usr/lib, so cheat and
 # set it to a value which we know will be suppressed.
 sed -i -e 's|^libdir=@libdir@$|libdir=@exec_prefix@/lib|g' src/gpg-error-config.in
+cp %{SOURCE1001} .
 
 %build
 %configure --disable-static --enable-malloc0returnsnull
@@ -38,6 +40,10 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
+mkdir -p %{buildroot}/usr/share/license
+cp %{_builddir}/%{name}-%{version}/COPYING %{buildroot}/usr/share/license/%{name}
+cat %{_builddir}/%{name}-%{version}/COPYING.LIB >> %{buildroot}/usr/share/license/%{name}
+
 %make_install
 rm -rf $RPM_BUILD_ROOT/%{_datadir}/common-lisp
 
@@ -81,6 +87,8 @@ rm -fr $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
+%manifest %{name}.manifest
+/usr/share/license/%{name}
 %defattr(-,root,root)
 %{_bindir}/gpg-error
 /%{_lib}/libgpg-error.so.*
