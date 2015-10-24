@@ -36,7 +36,10 @@ cp %{SOURCE1001} .
 
 %build
 %configure --disable-static --enable-malloc0returnsnull
-make
+%__make %{?_smp_mflags}
+
+%check
+make check
 
 %install
 rm -fr $RPM_BUILD_ROOT
@@ -75,9 +78,6 @@ popd
 # Add the soname symlink.
 /sbin/ldconfig -n $RPM_BUILD_ROOT/%{_lib}/
 rm -f $RPM_BUILD_ROOT/root_marker
-
-%check
-make check
 
 %clean
 rm -fr $RPM_BUILD_ROOT
